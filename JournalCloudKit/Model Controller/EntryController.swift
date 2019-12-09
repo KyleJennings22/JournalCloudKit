@@ -45,4 +45,21 @@ class EntryController {
             return completion(true)
         }
     }
+    
+    func deleteEntry(entry: Entry, completion: @escaping (Bool) -> Void) {
+        let recordID = CKRecord(entry: entry).recordID
+        
+        privateDB.delete(withRecordID: recordID) { (_, error) in
+            if let error = error {
+                print("Error deleting entry:", error.localizedDescription)
+                return completion(false)
+            }
+            print("Successfully deleted entry")
+            guard let index = self.entries.firstIndex(of: entry) else {return completion(false)}
+            print(self.entries)
+            self.entries.remove(at: index)
+            print(self.entries)
+            return completion(false)
+        }
+    }
 }

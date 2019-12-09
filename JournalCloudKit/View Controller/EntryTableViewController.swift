@@ -68,17 +68,24 @@ class EntryTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+            let entry = EntryController.shared.entries[indexPath.row]
+            EntryController.shared.deleteEntry(entry: entry) { (success) in
+                if success {
+                    print("Success - tableview")
+                    self.reloadView()
+                } else {
+                    print("nerp")
+                }
+            }
+            //tableView.deleteRows(at: [indexPath], with: .fade)
+        }
     }
-    */
+    
 
     /*
     // Override to support rearranging the table view.

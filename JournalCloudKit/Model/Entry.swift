@@ -9,7 +9,11 @@
 import Foundation
 import CloudKit
 
-class Entry {
+class Entry: Equatable {
+    static func == (lhs: Entry, rhs: Entry) -> Bool {
+        return lhs.title == rhs.title && lhs.body == rhs.body && lhs.timestamp == rhs.timestamp
+    }
+    
     let title: String
     let body: String
     let timestamp: Date
